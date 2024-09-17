@@ -39,7 +39,7 @@ def find_empty_cells(col):
             return cell_name
         
         i += 1
-        time.time.sleep(0.25)  #  slow down requests because of rate limiting
+        time.sleep(0.25)  #  slow down requests because of rate limiting
         
 
 def insert_data(cell_name, data):
