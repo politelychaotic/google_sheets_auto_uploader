@@ -46,5 +46,22 @@ def col_updater(row : int, col0 : str, col1 : str, data : dict):
     
 if __name__ == '__main__':
     empty = get_first_empty(2)
-    jsondata = open_json_data('data.json')
+    #jsondata = open_json_data('data.json')
+    driver = webdriver.Chrome()
+    actions = AdminActions(driver)
+    actions.login('your_username', 'your_password')
+
+    serials = actions.get_input_serials()
+    serials_to_data = {}
+
+    for serial in serials:
+        try:
+            data = actions.search(serial)
+            serials_to_data[serial] = data
+        except:
+            continue
+
+    import json
+    jsondata = json.dumps(serials_to_data, indent=4)
     col_updater(empty, column_1, column_2, jsondata)
+    print(jsondata)
